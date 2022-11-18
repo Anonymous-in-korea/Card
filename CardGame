@@ -1,0 +1,72 @@
+package Card;
+
+import java.util.Scanner;
+
+public class CardGame extends Card_Set {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// 1.카드섞기
+		// 2.카드 1장만 받기
+		// 3.사람 수만큼 카드5장씩 주기
+		// 4.내 카드보기
+		// 5.게임종료 및 카드확인
+		// 6.게임종료 및 리셋
+		// 0.프로그램종료
+
+		Scanner sc = new Scanner(System.in);
+		Deck_Test d = new Deck_Test();
+		int choice;
+		
+		loop:
+		while (true) {
+
+			System.out.println("[[ 포커게임 ]]");
+			System.out.print("1. 겜블러생성\t");
+			System.out.print("2. 카드생성 및 섞기\t");
+			System.out.println("3. 카드1장만 받기");
+			System.out.print("4. 카드5장씩 받기\t");
+			System.out.print("5. 내 카드보기\t");
+			System.out.print("6. 게임종료(리셋) 및 카드확인\t");
+			System.out.println("0. 프로그램종료");
+			System.out.println("----------------------------------------------------------------------");
+			System.out.println("원하는 항목의 번호를 입력해주세요.");
+			choice = sc.nextInt();
+			
+			switch ( choice ) {
+			
+			case 1://겜블러생성 및 카드생성
+				d.gambler();
+				break;
+				
+			case 2://카드생성
+				d.shuffle();
+				break;
+				
+			case 3://카드1장만받기
+				d.oneCard();
+				break;
+				
+			case 4://카드5장씩받기
+				d.fiveCard();
+				break;
+				
+			case 5://내 카드보기
+				
+				break;
+				
+			case 6://게임종료(리셋) 및 카드확인
+				d.endReset();
+				break;
+				
+			case 0://프로그램종료
+				d.programOff();
+				break loop;
+			
+			}//switch
+
+		} // while
+
+	}// main
+
+}// class
