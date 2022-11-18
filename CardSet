@@ -1,0 +1,17 @@
+package Card;
+
+public class Card_Set {
+
+	String color, kind, number;
+	
+	Card_Set() {
+		this("(Black)", "Spade", "1");
+	}
+	
+	Card_Set(String color, String kind, String number){
+		this.color = color;
+		this.kind = kind;
+		this.number = number;
+	}
+	
+}
