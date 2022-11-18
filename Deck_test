@@ -1,0 +1,120 @@
+package Card;
+
+import java.util.Scanner;
+
+public class Deck_Test extends Card_Set {
+
+	Scanner sc = new Scanner(System.in);
+	Card_Set[] c = new Card_Set[52];
+	Gambler[] g = new Gambler[10];
+	String gambler;
+	int count, round, num, endcount;
+
+	// 겜블러생성하기
+	void gambler() {
+		System.out.println("게임참가자를 입력해주세요. < 0을 입력하면 입력을 종료합니다. >");
+		for (int i = 0; i < g.length; i++) {
+			g[i] = new Gambler();
+			g[i].gambler = sc.next();
+			count = i + 1;
+			if (g[i].gambler.equals("0")) {
+				System.out.println("입력이 완료되었습니다. 게임을 시작합니다.");
+				return;
+			}
+		}
+	}
+
+	// 카드섞기
+	void shuffle() {
+
+		// 입력
+		for (int i = 0; i < c.length; i++) {
+			c[i] = new Card_Set();
+			if (i / 13 == 0) {
+				c[i].kind = "Spade";
+			} else if (i / 13 == 1) {
+				c[i].kind = "Diamond";
+			} else if (i / 13 == 2) {
+				c[i].kind = "Clover";
+			} else if (i / 13 == 3) {
+				c[i].kind = "Heart";
+			}
+
+			if (i % 13 == 12) {
+				c[i].number = "K";
+			} else if (i % 13 == 11) {
+				c[i].number = "Q";
+			} else if (i % 13 == 10) {
+				c[i].number = "J";
+			} else if (i % 13 < 10) {
+				c[i].number = "" + ((i % 13) + 1);
+			}
+
+			if (c[i].kind == "Spade" || c[i].kind == "Clover") {
+				c[i].color = "(Black)";
+			} else if (c[i].kind == "Diamond" || c[i].kind == "Heart") {
+				c[i].color = "(Red)";
+			}
+
+		}//for
+
+		Card_Set temp = null;
+		int rn = 0;
+		for (int i = 0; i < 1000; i++) {
+			rn = (int) (Math.random() * 52);
+			temp = c[0];
+			c[0] = c[rn];
+			c[rn] = temp;
+		}
+		System.out.println("[[ 카드섞기가 완료되었습니다. ]]");
+
+	}// void
+
+	// 카드생성하기
+	Deck_Test() {}// Deck_Test
+
+	// 2.카드1장만받기
+	void oneCard() {
+
+		for (int i = 0; i < 1; i++) {
+			System.out.println("한 장의 카드를 받았습니다.");
+			System.out.println(c[i].color + c[i].kind + "-" + c[i].number);
+		}
+
+	}// void
+
+	// 3.사람 수 만큼 카드5장씩 주기
+	void fiveCard() {
+
+		for (int i = 0; i < count; i++) {
+			System.out.println((i + 1) + "번째 " + g[i].gambler);
+			for (int j = num; 5*i <= j && j < 5*(i+1); j++) {
+				System.out.println(c[j].color + c[j].kind + "-" + c[j].number);
+				num++;
+			}
+		}
+		System.out.println(count + "명이 다섯 장 씩 카드를 받았습니다.");
+
+	}// void
+
+	// 4.내 카드보기
+
+	// 5.게임종료 및 카드확인
+
+	// 6.게임종료 및 리셋
+	void endReset() {
+
+		System.out.println((round + 1) + "라운드를 종료하고 카드를 리셋합니다.");
+		round++;
+
+	}// void
+
+	// 0.프로그램종료
+	void programOff() {
+
+		System.out.println("[[ 프로그램을 종료합니다. ]]");
+		System.exit(0);
+
+	}// void
+
+}// class
